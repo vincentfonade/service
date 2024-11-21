@@ -6,6 +6,15 @@
     <title>Dynamic Radar Chart</title>
     <!-- Inclure la bibliothèque Chart.js depuis le CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    if (typeof Chart !== 'undefined') {
+        console.log('Chart.js est correctement chargé !');
+    } else {
+        console.error('Chart.js n\'a pas pu être chargé.');
+    }
+    </script>
+
+    
 </head>
 <body>
     <!-- Canvas pour afficher le graphique radar -->
