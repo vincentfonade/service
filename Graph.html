@@ -4,43 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Radar Chart</title>
-    <!-- Inclure la bibliothèque Chart.js depuis le CDN -->
+    <!-- Inclure la bibliothèque Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Vérification que Chart.js est correctement chargé
-        if (typeof Chart !== 'undefined') {
-            console.log('Chart.js est correctement chargé !');
-        } else {
-            console.error('Chart.js n\'a pas pu être chargé.');
-        }
-    </script>
     <style>
-        /* Style pour rendre le canvas responsive */
-        canvas {
-            width: 100%;
-            height: auto;
-        }
-
-        #radarChart {
-            max-width: 960px; /* Largeur maximale */
-            margin: 0 auto; /* Centrage horizontal */
-        }
-
+        /* Styles pour rendre le canvas responsive */
         body {
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Remplir la hauteur de l'écran */
-            margin: 0; /* Supprimer les marges par défaut */
-            background-color: #f8f9fa; /* Optionnel : arrière-plan léger */
+            min-height: 100vh;
+            background-color: #f8f9fa; /* Optionnel */
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-width: 960px; /* Limite maximale */
+        }
+
+        #radarChart {
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <!-- Conteneur pour le graphique radar -->
-    <div style="width: 100%; max-width: 960px; margin: 0 auto;">
-        <canvas id="radarChart"></canvas>
-    </div>
+    <canvas id="radarChart"></canvas>
 
     <script>
         // Fonction pour récupérer les paramètres dynamiques de l'URL
@@ -51,7 +42,6 @@
         }
 
         // Récupérer les valeurs dynamiques de l'URL
-        // Exemple : ?ResultatEntreprise=2,3,1,4,5,2,1,3
         const dynamicValues = getUrlParameter('ResultatEntreprise') || [2, 3, 1, 4, 5, 2, 1, 3];
 
         // Libellés des axes du graphique
@@ -91,13 +81,13 @@
                 scales: {
                     r: {
                         beginAtZero: true,
-                        max: 5 // Limite supérieure des scores
+                        max: 5
                     }
                 },
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'top'
+                        position: 'top',
                     }
                 }
             }
