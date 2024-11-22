@@ -28,10 +28,6 @@
             width: 100% !important;
             height: 100% !important;
         }
-        .label-wrap {
-            white-space: pre-wrap;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -47,14 +43,14 @@
 
         const dynamicValues = getUrlParameter('ResultatEntreprise') || [2, 3, 1, 4, 5, 2, 1, 3];
         const labels = [
-            "Élaborer\nvos stratégies RH",
-            "Manager\net accompagner",
-            "Donner\ndu sens",
-            "Mieux vivre\nensemble",
-            "Grandir\nensemble",
-            "Proposer un package\nde rémunération attractif",
-            "Répondre aux\nexigences légales",
-            "Mieux vivre\nensemble"
+            "Élaborer vos stratégies RH",
+            "Manager et accompagner",
+            "Donner du sens",
+            "Mieux vivre ensemble",
+            "Grandir ensemble",
+            "Proposer un package de rémunération attractif",
+            "Répondre aux exigences légales", 
+            "Mieux vivre ensemble"
         ];
 
         const data = {
@@ -87,12 +83,7 @@
                 scales: {
                     r: {
                         suggestedMin: 0,
-                        suggestedMax: 5,
-                        pointLabels: {
-                            callback: function(value, index) {
-                                return value.split('\n').join('\n');
-                            }
-                        }
+                        suggestedMax: 5
                     }
                 }
             }
