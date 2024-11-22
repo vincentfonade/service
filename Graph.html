@@ -13,12 +13,13 @@
             justify-content: center;
             align-items: center;
             background-color: #f8f9fa;
+            height: auto;
         }
 
         #radarChart {
             width: 100%;
             height: auto;
-            max-width: 960px; /* Limite maximale */
+            max-width: 960px; /* Largeur maximale */
         }
     </style>
 </head>
@@ -93,8 +94,9 @@
 
         // Fonction pour envoyer la hauteur calculée à la page parent
         function sendHeightToParent() {
-            const canvasHeight = document.getElementById('radarChart').parentNode.offsetHeight;
-            console.log('Hauteur envoyée à la LP :', canvasHeight); // Vérifie la hauteur envoyée
+            const canvas = document.getElementById('radarChart');
+            const canvasHeight = canvas.parentNode.offsetHeight; // Hauteur réelle
+            console.log('Hauteur envoyée à la LP :', canvasHeight); // Log pour vérifier la hauteur
             window.parent.postMessage({ type: 'resize', height: canvasHeight }, '*');
         }
 
