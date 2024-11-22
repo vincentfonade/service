@@ -12,7 +12,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             background-color: #f8f9fa;
         }
 
@@ -70,7 +69,7 @@
             data: data,
             options: {
                 responsive: true, // Activer la responsivité
-                maintainAspectRatio: true, // Maintenir le ratio
+                maintainAspectRatio: false, // Ne pas maintenir le ratio aspect
                 scales: {
                     r: {
                         beginAtZero: true,
@@ -87,22 +86,12 @@
         };
 
         // Rendu du graphique
-        new Chart(
+        const radarChart = new Chart(
             document.getElementById('radarChart'),
             config
         );
 
-        // Fonction pour envoyer la hauteur à la page parent
+        // Fonction pour envoyer la hauteur calculée à la page parent
         function sendHeightToParent() {
-            const height = document.documentElement.scrollHeight;
-            window.parent.postMessage({ type: 'resize', height: height }, '*');
-        }
-
-        // Envoyer la hauteur après le chargement de la page
-        window.addEventListener('load', sendHeightToParent);
-
-        // Envoyer la hauteur après un redimensionnement éventuel du contenu
-        window.addEventListener('resize', sendHeightToParent);
-    </script>
-</body>
-</html>
+            const chartHeight = document.getElementById('radarChart').clientHeight;
+            const totalHeight = chartHeight + 20; // Ajouter une marge pour éviter
