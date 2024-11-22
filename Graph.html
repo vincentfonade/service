@@ -13,10 +13,9 @@
             justify-content: center;
             align-items: center;
             background-color: #f8f9fa;
-            height: auto;
         }
 
-        #radarChart {
+        canvas {
             width: 100%;
             height: auto;
             max-width: 960px; /* Largeur maximale */
@@ -94,17 +93,12 @@
 
         // Fonction pour envoyer la hauteur calculée à la page parent
         function sendHeightToParent() {
-            const canvas = document.getElementById('radarChart');
-            const canvasHeight = canvas.parentNode.offsetHeight; // Hauteur réelle
-            console.log('Hauteur envoyée à la LP :', canvasHeight); // Log pour vérifier la hauteur
-            window.parent.postMessage({ type: 'resize', height: canvasHeight }, '*');
+            const bodyHeight = document.body.scrollHeight; // Hauteur totale
+            window.parent.postMessage({ type: 'resize', height: bodyHeight }, '*');
         }
 
         // Envoyer la hauteur après chargement
-        window.addEventListener('load', () => {
-            console.log('Page chargée, calcul de la hauteur...');
-            setTimeout(sendHeightToParent, 500); // Délai pour garantir que le graphique est rendu
-        });
+        window.addEventListener('load', sendHeightToParent);
 
         // Envoyer la hauteur après redimensionnement
         window.addEventListener('resize', sendHeightToParent);
