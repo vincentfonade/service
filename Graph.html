@@ -69,7 +69,7 @@
             data: data,
             options: {
                 responsive: true, // Activer la responsivité
-                maintainAspectRatio: false, // Ne pas maintenir le ratio aspect
+                maintainAspectRatio: true, // Maintenir le ratio aspect
                 scales: {
                     r: {
                         beginAtZero: true,
@@ -93,5 +93,19 @@
 
         // Fonction pour envoyer la hauteur calculée à la page parent
         function sendHeightToParent() {
-            const chartHeight = document.getElementById('radarChart').clientHeight;
-            const totalHeight = chartHeight + 20; // Ajouter une marge pour éviter
+            const canvas = document.getElementById('radarChart');
+            const canvasHeight = canvas.parentNode.offsetHeight;
+            const totalHeight = canvasHeight + 50; // Ajoute une marge pour éviter des coupures
+            window.parent.postMessage({ type: 'resize', height: totalHeight }, '*');
+        }
+
+        // Envoyer la hauteur après le chargement du graphique
+        window.addEventListener('load', () => {
+            setTimeout(sendHeightToParent, 500); // Assure que le graphique est rendu
+        });
+
+        // Réagir à tout changement de taille
+        window.addEventListener('resize', sendHeightToParent);
+    </script>
+</body>
+</html>
