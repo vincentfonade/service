@@ -7,25 +7,40 @@
     <!-- Inclure la bibliothèque Chart.js depuis le CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-    if (typeof Chart !== 'undefined') {
-        console.log('Chart.js est correctement chargé !');
-    } else {
-        console.error('Chart.js n\'a pas pu être chargé.');
-    }
+        // Vérification que Chart.js est correctement chargé
+        if (typeof Chart !== 'undefined') {
+            console.log('Chart.js est correctement chargé !');
+        } else {
+            console.error('Chart.js n\'a pas pu être chargé.');
+        }
     </script>
     <style>
-    canvas {
-        <div style="width: 100%; max-width: 960px; margin: 0 auto;">
-    <canvas id="radarChart"></canvas>
-        </div>
-    }
-</style>
+        /* Style pour rendre le canvas responsive */
+        canvas {
+            width: 100%;
+            height: auto;
+        }
 
-    
+        #radarChart {
+            max-width: 960px; /* Largeur maximale */
+            margin: 0 auto; /* Centrage horizontal */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Remplir la hauteur de l'écran */
+            margin: 0; /* Supprimer les marges par défaut */
+            background-color: #f8f9fa; /* Optionnel : arrière-plan léger */
+        }
+    </style>
 </head>
 <body>
-    <!-- Canvas pour afficher le graphique radar -->
-    <canvas id="radarChart" width="960" height="400"></canvas>
+    <!-- Conteneur pour le graphique radar -->
+    <div style="width: 100%; max-width: 960px; margin: 0 auto;">
+        <canvas id="radarChart"></canvas>
+    </div>
 
     <script>
         // Fonction pour récupérer les paramètres dynamiques de l'URL
@@ -71,12 +86,18 @@
             type: 'radar',
             data: data,
             options: {
-                responsive: true,
-                maintainAspectRatio: false, 
+                responsive: true, // Activer la responsivité
+                maintainAspectRatio: true, // Maintenir le ratio aspect
                 scales: {
                     r: {
                         beginAtZero: true,
                         max: 5 // Limite supérieure des scores
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
                     }
                 }
             }
